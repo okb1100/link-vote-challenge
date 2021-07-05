@@ -2,7 +2,12 @@
   <Card class="link-card-container">
     <PointsCounter :points="link.points" />
     <div class="info">
-      <div class="link-card-title">{{ link.name }}</div>
+      <div class="link-card-title">
+          {{ link.name }}
+          <span class="link-card-time">
+            {{ createdAt }}
+          </span>
+      </div>
       <div class="link-card-url">
         <a target="_blank" :href="link.url">{{ link.url }}</a>
       </div>
@@ -31,13 +36,17 @@ export default {
   },
   methods: {
     removeLink() {
-      this.$store.commit("removeLink", this.link.id);
+      this.$emit("delete", this.link);
     },
     voteLink(voteUp) {
-        console.log({link: this.link, voteUp})
       this.$store.commit("voteLink", { id: this.link.id, voteUp });
     },
   },
+  computed: {
+      createdAt(){
+          return new Date(this.link.createdAt).toLocaleTimeString()
+      }
+  }
 };
 </script>
 
@@ -80,6 +89,12 @@ export default {
 .link-card-title {
   font-weight: bold;
   font-size: 1.25em;
+}
+
+.link-card-time{
+    font-size: x-small;
+    color: #969696;
+    font-weight: lighter;
 }
 
 .link-card-url a,

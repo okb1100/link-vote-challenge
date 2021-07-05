@@ -1,5 +1,6 @@
 <template>
   <div class="pagination-container">
+  <div class="pagination-numbers">
     <div
       @click="setPage(currentPage - 1)"
       class="pagination-arrow"
@@ -24,6 +25,7 @@
       &gt;
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -47,13 +49,19 @@ export default {
 </script>
 
 <style>
-.pagination-container {
+
+.pagination-container{
+    display: flex;
+    justify-content: center;
+}
+.pagination-numbers {
   display: flex;
   flex-direction: row;
   margin: 10px 0 10px 0;
   font-size: 1.15em;
   align-items: center;
   justify-content: center;
+  min-width: 300px;
 }
 
 .pagination-number,

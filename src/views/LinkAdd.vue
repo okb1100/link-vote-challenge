@@ -6,10 +6,22 @@
     <h3>Add New Link</h3>
     <div class="form-container">
       <label for="link-name">Link Name</label>
-      <input placeholder="Name" type="text" id="link-name" v-model="name" />
+      <input
+        required
+        placeholder="Name"
+        type="text"
+        id="link-name"
+        v-model="name"
+      />
 
       <label for="link-url">Link URL</label>
-      <input placeholder="URL" type="text" id="link-url" v-model="url" />
+      <input
+        required
+        placeholder="URL"
+        type="text"
+        id="link-url"
+        v-model="url"
+      />
 
       <button @click="addNewLink" class="add">Add</button>
     </div>
@@ -19,7 +31,7 @@
 <script>
 import Card from "../components/Card.vue";
 import Container from "../components/Container.vue";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const isValidUrl = (str) => {
   try {
@@ -47,18 +59,34 @@ export default {
       this.$router.go(-1);
     },
     addNewLink() {
-      if (isValidUrl(this.url)) {
-        this.$store.commit('addLink', {
-            id: uuidv4(),
-            name: this.name,
-            url: this.url,
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
-            points: 0
-        })
-      } else {
-        alert("not ok");
+      if (!this.name.length) {
+        this.$store.dispatch("showToast", {
+          type: "error",
+          content: `Name is required`,
+        });
+        return;
       }
+      if (!isValidUrl(this.url)) {
+        this.$store.dispatch("showToast", {
+          type: "error",
+          content: "Please enter a valid URL",
+        });
+        return;
+      }
+      this.$store.commit("addLink", {
+        id: uuidv4(),
+        name: this.name,
+        url: this.url,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        points: 0,
+      });
+      this.$store.dispatch("showToast", {
+        type: "success",
+        content: `${this.name} Added`,
+      });
+      this.name = "";
+      this.url = "";
     },
   },
 };

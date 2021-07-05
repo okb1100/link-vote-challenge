@@ -16,6 +16,7 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 81vh;
+  height: 80vh;
+  overflow: scroll;
 }
 </style>
