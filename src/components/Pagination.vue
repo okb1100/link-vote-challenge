@@ -64,5 +64,6 @@ export default {
 
 .pagination-number.current {
   font-weight: bold;
+  border: 1px solid #c2c2c2;
 }
 </style>

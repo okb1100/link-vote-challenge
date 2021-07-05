@@ -6,24 +6,23 @@
         <Card :pointer="true" @click.native="showSubmitPage">
           Submit a link
         </Card>
+        <div class="list-empty" v-if="!$store.state.links.length">No record found</div>
         <LinkCard
-          v-for="item in items.filter(
+          v-for="item in $store.state.links.filter(
             (item, index) =>
               index + 1 > (currentPage - 1) * pageSize &&
               index < currentPage * pageSize
           )"
-          :title="item.name"
-          :url="item.url"
-          :points="item.points"
+          :link="item"
           :key="item.id"
         />
       </Container>
 
       <Pagination
         @set-page="handlePageChange"
-        v-if="items.length > pageSize"
+        v-if="$store.state.links.length > pageSize"
         :currentPage="currentPage"
-        :totalPages="Math.ceil(items.length / pageSize)"
+        :totalPages="Math.ceil($store.state.links.length / pageSize)"
       />
     </div>
 </template>
@@ -49,48 +48,10 @@ export default {
       this.$router.push('add')
     }
   },
-  data: () => ({
+  data() {return {
     pageSize: 5,
     currentPage: 1,
-    items: [
-      {
-        id: "uuid-1",
-        name: "1",
-        url: "https://google.com",
-        points: 5,
-      },
-      {
-        id: "uuid-2",
-        name: "2",
-        url: "https://google.com",
-        points: -5,
-      },
-      {
-        id: "uuid-2",
-        name: "3",
-        url: "https://google.com",
-        points: -5,
-      },
-      {
-        id: "uuid-2",
-        name: "4",
-        url: "https://google.com",
-        points: -5,
-      },{
-        id: "uuid-2",
-        name: "5",
-        url: "https://google.com",
-        points: -5,
-      },
-      {
-        id: "uuid-2",
-        name: "6",
-        url: "https://google.com",
-        points: -5,
-      },
-     
-    ],
-  }),
+  }},
 };
 </script>
 
@@ -106,6 +67,10 @@ export default {
 .links-container {
   display: flex;
   flex-direction: column;
+}
+
+.list-empty{
+  margin-top: 20px;
 }
 
 </style>

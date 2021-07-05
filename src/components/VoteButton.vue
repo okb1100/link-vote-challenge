@@ -18,5 +18,6 @@ export default {
 <style>
     .vote-button-container{
         cursor: pointer;
+        user-select: none;
     }
 </style>

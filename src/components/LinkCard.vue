@@ -1,17 +1,17 @@
 <template>
   <Card class="link-card-container">
-    <PointsCounter :points="points" />
+    <PointsCounter :points="link.points" />
     <div class="info">
-      <div class="link-card-title">{{ title }}</div>
+      <div class="link-card-title">{{ link.name }}</div>
       <div class="link-card-url">
-        <a :href="url">{{ url }}</a>
+        <a target="_blank" :href="link.url">{{ link.url }}</a>
       </div>
       <div class="vote-container">
-        <VoteButton type="up" />
-        <VoteButton type="down" />
+        <VoteButton @click.native="voteLink(true)" type="up" />
+        <VoteButton @click.native="voteLink(false)" type="down" />
       </div>
     </div>
-    <div class="link-card-delete">&times;</div>
+    <div @click="removeLink" class="link-card-delete">&times;</div>
   </Card>
 </template>
 
@@ -27,9 +27,16 @@ export default {
     Card,
   },
   props: {
-    title: String,
-    url: String,
-    points: Number,
+    link: Object,
+  },
+  methods: {
+    removeLink() {
+      this.$store.commit("removeLink", this.link.id);
+    },
+    voteLink(voteUp) {
+        console.log({link: this.link, voteUp})
+      this.$store.commit("voteLink", { id: this.link.id, voteUp });
+    },
   },
 };
 </script>
