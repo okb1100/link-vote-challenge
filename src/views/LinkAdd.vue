@@ -59,7 +59,7 @@ export default {
       this.$router.go(-1);
     },
     addNewLink() {
-      if (!this.name.length) {
+      if (!this.name.trim().length) {
         this.$store.dispatch("showToast", {
           type: "error",
           content: `Name is required`,
