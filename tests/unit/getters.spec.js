@@ -2,6 +2,11 @@ import { getters } from '@/store'
 
 
 describe('getters', () => {
+    it('returns toast', () => {
+        const toast = {content: 'OK', type: 'success', visible: true}
+        const state = {toast}
+        expect(getters.toast(state)).toStrictEqual(expect.objectContaining(toast))
+    })
     it('returns link count', () => {
         const state = {
             links: [
