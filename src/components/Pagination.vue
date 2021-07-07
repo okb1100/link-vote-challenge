@@ -3,7 +3,7 @@
   <div class="pagination-numbers">
     <div
       @click="setPage(currentPage - 1)"
-      class="pagination-arrow"
+      class="pagination-arrow prev"
       v-if="currentPage > 1"
     >
       &lt;
@@ -19,7 +19,7 @@
     </div>
     <div
       @click="setPage(currentPage + 1)"
-      class="pagination-arrow"
+      class="pagination-arrow next"
       v-if="currentPage < pagesArray.length"
     >
       &gt;

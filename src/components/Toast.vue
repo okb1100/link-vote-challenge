@@ -1,7 +1,7 @@
 <template>
-  <div class="toast-container" :class="{ visible: options.visible }">
-    <div class="toast-body" :class="options.type">
-      {{ options.content }}
+  <div class="toast-container" :class="{ visible: visible }">
+    <div class="toast-body" :class="type">
+      {{ content }}
     </div>
   </div>
 </template>
@@ -9,7 +9,9 @@
 <script>
 export default {
   props: {
-    options: Object,
+    visible: Boolean,
+    type: String,
+    content: String
   },
 };
 </script>

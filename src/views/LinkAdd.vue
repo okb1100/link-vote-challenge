@@ -73,7 +73,7 @@ export default {
         });
         return;
       }
-      this.$store.commit("addLink", {
+      this.$store.dispatch("addLink", {
         id: uuidv4(),
         name: this.name,
         url: this.url,

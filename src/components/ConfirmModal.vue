@@ -8,8 +8,8 @@
         <slot></slot>
       </div>
       <div class="modal-buttons">
-        <button @click="okClicked">OK</button>
-        <button @click="cancelClicked">Cancel</button>
+        <button id="confirm" @click="okClicked">OK</button>
+        <button id="cancel" @click="cancelClicked">Cancel</button>
       </div>
     </div>
   </div>

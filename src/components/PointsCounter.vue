@@ -1,9 +1,8 @@
 <template>
     <div class="points-counter">
         <div>
-            {{points}}
+            {{points}} <div>Points</div>
         </div>
-        <div>Points</div>
     </div>
 </template>
 

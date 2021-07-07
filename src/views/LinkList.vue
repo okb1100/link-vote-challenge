@@ -84,7 +84,7 @@ export default {
   computed: {
     ...mapGetters(["linkCount", "links"]),
     sortedLinks() {
-      return this.links(this.pageSize, (this.currentPage - 1) * this.pageSize, {
+      return this.$store.getters.links(this.pageSize, (this.currentPage - 1) * this.pageSize, {
         key: this.sortBy.split("|")[0],
         order: this.sortBy.split("|")[1],
       });

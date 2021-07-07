@@ -12,8 +12,8 @@
         <a target="_blank" :href="link.url">{{ link.url }}</a>
       </div>
       <div class="vote-container">
-        <VoteButton @click.native="voteLink(true)" type="up" />
-        <VoteButton @click.native="voteLink(false)" type="down" />
+        <VoteButton @click.native="vote(true)" type="up" />
+        <VoteButton @click.native="vote(false)" type="down" />
       </div>
     </div>
     <div @click="removeLink" class="link-card-delete">&times;</div>
@@ -24,6 +24,7 @@
 import PointsCounter from "./PointsCounter.vue";
 import Card from "./Card.vue";
 import VoteButton from "./VoteButton.vue";
+import { mapActions } from 'vuex';
 export default {
   name: "LinkCard",
   components: {
@@ -35,11 +36,12 @@ export default {
     link: Object,
   },
   methods: {
+    ...mapActions(['voteLink']),
     removeLink() {
       this.$emit("delete", this.link);
     },
-    voteLink(voteUp) {
-      this.$store.commit("voteLink", { id: this.link.id, voteUp });
+    vote(voteUp) {
+      this.voteLink({ id: this.link.id, voteUp });
     },
   },
   computed: {

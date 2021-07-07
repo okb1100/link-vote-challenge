@@ -8,12 +8,13 @@
         <span>Link<strong>Vote</strong> Challenge</span>
       </template>
     </Header>
-    <Toast :options="$store.state.toast"/>
+    <Toast :content="toast.content" :visible="toast.visible" :type="toast.type"/>
     <RouterView/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Header from "./components/Header.vue";
 import Toast from './components/Toast.vue';
 
@@ -22,6 +23,9 @@ export default {
   components: {
     Header,
     Toast,
+  },
+  computed: {
+    ...mapGetters(["toast"]),
   }
 }
 </script>
